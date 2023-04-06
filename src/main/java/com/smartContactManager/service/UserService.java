@@ -5,10 +5,10 @@ import com.smartContactManager.entity_model.UserEntityPojo;
 import com.smartContactManager.pojo.UserPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Component
-@Service
 public class UserService extends Exception {
     UserEntityPojo userPojoEntity = new UserEntityPojo();
     @Autowired
@@ -36,15 +36,31 @@ public class UserService extends Exception {
         }
     }
 
-    public void signInProcessor(UserPojo userPojo) {
+
+    public void signInProcessor(UserPojo userPojo)
+    {
+        System.out.println("inside sign in processor");
+        userPojoEntity.setUserEmailId(userPojo.getUserEmailId());
+        System.out.println(userPojoEntity.getUserEmailId());
+        userPojoEntity.setPassword(userPojo.getPassword());
+        System.out.println(userPojoEntity.getPassword());
+        List<UserEntityPojo> user = userRepo.findByUserEmailId(userPojo.getUserEmailId());
+        user.forEach(e->{
+            System.out.println(e);
+        });
+
+
+    }
+
+//    public void signInProcessor(UserPojo userPojo) {
 //        System.out.println("checkpoint 1");
 //        System.out.println(userPojoEntity);
 //        List<UserEntityPojo> user = userRepo.findByUserEmailId(userPojo.getUserEmailId());
 //        user.forEach(e->{
 //            System.out.println(e);
 //        });
-
-    }
+//
+//    }
 
 
 }

@@ -1,6 +1,8 @@
 package com.smartContactManager.entity_model;
 
+
 import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "CONTACT_DETAILS_SCM")

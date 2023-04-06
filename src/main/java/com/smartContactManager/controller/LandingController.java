@@ -1,6 +1,5 @@
 package com.smartContactManager.controller;
 
-import com.smartContactManager.entity_model.UserEntityPojo;
 import com.smartContactManager.pojo.ResponsePojo;
 import com.smartContactManager.pojo.UserPojo;
 import com.smartContactManager.service.UserService;
@@ -10,21 +9,21 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller()
 public class LandingController {
-
-   private UserService userService = new UserService();
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/home")
     public String home() {
         return "home";
     }
+
     @PostMapping("/signup")
     @ResponseBody
     public ResponsePojo signupController(@RequestBody UserPojo userPojo) {
-
         ResponsePojo responsePojo = new ResponsePojo();
         System.out.println(userPojo);
-
         try {
+
             if (userPojo != null) {
                 userService.SignUpProcessor(userPojo);
                 responsePojo.setStatus("success");
@@ -37,20 +36,28 @@ public class LandingController {
                 responsePojo.setMessage("something went wrong");
                 //responsePojo.setUserModel(userPojo);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+
+            } catch (Exception e) {
+                System.out.println(e);
         }
+
         return responsePojo;
     }
 
-    @PutMapping("/signin")
-    public void signInController(@RequestBody UserPojo userPojo)
+    @GetMapping("/signInProcess")
+    public void signInCtr(@RequestBody UserPojo userPojo)
     {
-        System.out.println(userPojo.getUserEmailId());
-        System.out.println(userPojo.getPassword());
         userService.signInProcessor(userPojo);
-
     }
+
+//    @PutMapping("/signing")
+//    public void signInController(@RequestBody UserPojo userPojo)
+//    {
+//        System.out.println(userPojo.getUserEmailId());
+//        System.out.println(userPojo.getPassword());
+//        userService.signInProcessor(userPojo);
+//
+//    }
 
 
 }

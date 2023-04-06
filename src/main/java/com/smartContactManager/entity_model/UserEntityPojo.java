@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 @Entity
-@Table(name = "user_scm")
+@Table(name = "USER_SCM")
 public class UserEntityPojo {
 
     @Id
